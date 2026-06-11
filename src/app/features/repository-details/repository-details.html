@@ -1,0 +1,88 @@
+<div class="min-h-screen bg-gray-50 p-8">
+
+    <div class="max-w-4xl mx-auto">
+
+        <a routerLink="/" class="text-blue-600 font-medium hover:underline">
+            ← Back to Dashboard
+        </a>
+
+        @if (repository()) {
+
+        <div class="mt-6 rounded-xl bg-white p-6 shadow">
+
+            <div class="flex items-center gap-4 mb-6">
+
+                <img [src]="repository()?.owner?.avatar_url" [alt]="repository()?.owner?.login"
+                    class="h-14 w-14 rounded-full" />
+
+                <div>
+                    <p class="text-sm text-gray-500">
+                        Repository Owner
+                    </p>
+
+                    <p class="font-semibold">
+                        {{ repository()?.owner?.login }}
+                    </p>
+                </div>
+
+            </div>
+
+            <h1 class="text-4xl font-bold mb-4">
+                {{ repository()?.name }}
+            </h1>
+
+            <p class="text-gray-600 mb-4">
+                {{ repository()?.description }}
+            </p>
+
+            <a [href]="repository()?.html_url" target="_blank" rel="noopener noreferrer"
+                class="inline-block mb-6 text-blue-600 hover:underline">
+                View on GitHub →
+            </a>
+
+            <div class="grid gap-4 md:grid-cols-2">
+
+                <div>
+                    <strong>Language:</strong>
+                    {{ repository()?.language }}
+                </div>
+
+                <div>
+                    <strong>Stars:</strong>
+                    ⭐ {{ repository()?.stargazers_count }}
+                </div>
+
+                <div>
+                    <strong>Forks:</strong>
+                    🍴 {{ repository()?.forks_count }}
+                </div>
+
+                <div>
+                    <strong>Watchers:</strong>
+                    👀 {{ repository()?.watchers_count }}
+                </div>
+
+                <div>
+                    <strong>Open Issues:</strong>
+                    {{ repository()?.open_issues_count }}
+                </div>
+
+                <div>
+                    <strong>Default Branch:</strong>
+                    {{ repository()?.default_branch }}
+                </div>
+
+                <div>
+                    <strong>Last Updated:</strong>
+                    {{ repository()?.updated_at | date:'medium' }}
+                </div>
+
+            </div>
+
+        </div>
+
+        }
+
+    </div>
+
+</div>

@@ -1,0 +1,77 @@
+<div class="min-h-screen bg-gray-50 p-8">
+
+  <div class="max-w-7xl mx-auto">
+
+    <h1 class="text-4xl font-bold mb-8">
+      Trending GitHub Repositories
+    </h1>
+
+    @if (loading()) {
+
+    <div class="rounded-lg bg-white p-6 shadow">
+      Loading repositories...
+    </div>
+
+    }
+
+    @if (error()) {
+
+    <div class="rounded-lg bg-red-100 p-4 text-red-700">
+      {{ error() }}
+    </div>
+
+    }
+
+    @if (!loading() && !error()) {
+
+    <p class="mb-6 text-gray-600">
+      Total Repositories:
+      {{ repositories().length }}
+    </p>
+
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+
+      @for (
+      repo of repositories();
+      track repo.id
+      ) {
+
+      <div data-testid="repository-card"
+        class="cursor-pointer rounded-xl border bg-white p-5 shadow-sm transition hover:shadow-lg"
+        (click)="viewRepository(repo)">
+
+        <h2 class="text-xl font-bold">
+          {{ repo.name }}
+        </h2>
+
+        <p class="mt-2 text-gray-600">
+          {{ repo.description }}
+        </p>
+
+        <div class="mt-4 flex flex-wrap gap-4 text-sm">
+
+          <span>
+            ⭐ {{ repo.stargazers_count }}
+          </span>
+
+          <span>
+            🍴 {{ repo.forks_count }}
+          </span>
+
+          <span>
+            {{ repo.language }}
+          </span>
+
+        </div>
+
+      </div>
+
+      }
+
+    </div>
+
+    }
+
+  </div>
+
+</div>
